@@ -1,0 +1,5 @@
+@startuml
+class Berthold {
+    + Berthold()
+}
+@enduml

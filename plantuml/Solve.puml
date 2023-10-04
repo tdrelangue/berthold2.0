@@ -1,0 +1,15 @@
+@startuml
+class Solve {
+    + Solve()
+    + CreateEquation(tab:decimal[]) : void
+    + CreateEquation(tab:List<decimal>) : void
+    + <<override>> ToString() : string
+    + Simplify() : void
+    + SolveEq() : void
+    + IsSolved() : bool
+    + FindPrimeNb(max:int) : List<int>
+    + TurnToInt() : void
+    + ExtendPrime() : void
+}
+Solve --> "Equation" Equation
+@enduml

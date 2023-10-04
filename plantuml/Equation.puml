@@ -1,0 +1,13 @@
+@startuml
+class Equation {
+    + Equation()
+    + <<override>> ToString() : string
+    + AddCoef(coef:decimal) : void
+    + FindDivisors() : List<decimal>
+    + SyntheticDivision(divisor:decimal) : List<decimal>
+    + Duplicate() : Equation
+}
+class "List`1"<T> {
+}
+Equation --> "Coefs<decimal>" "List`1"
+@enduml

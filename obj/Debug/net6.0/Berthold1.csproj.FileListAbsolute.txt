@@ -1,0 +1,15 @@
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\bin\Debug\net6.0\Berthold1.exe
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\bin\Debug\net6.0\Berthold1.deps.json
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\bin\Debug\net6.0\Berthold1.runtimeconfig.json
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\bin\Debug\net6.0\Berthold1.dll
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\bin\Debug\net6.0\Berthold1.pdb
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.csproj.AssemblyReference.cache
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.AssemblyInfoInputs.cache
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.AssemblyInfo.cs
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.csproj.CoreCompileInputs.cache
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.dll
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\refint\Berthold1.dll
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.pdb
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\Berthold1.genruntimeconfig.cache
+C:\Users\tdrelangue\OneDrive\programmes\Projets Csharp\berthold\Berthold_1.0\obj\Debug\net6.0\ref\Berthold1.dll
