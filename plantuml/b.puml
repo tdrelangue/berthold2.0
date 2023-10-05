@@ -1,5 +1,0 @@
-@startuml
-class B <<static>> {
-    + {static} Present() : void
-}
-@enduml
