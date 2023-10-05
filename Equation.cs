@@ -136,4 +136,19 @@ public class Equation
         }
         return eq;
     }
+
+    public bool TestNbInt()
+    {
+        bool equCoefsInt = true;
+
+        for (int i = 0; i < Coefs.Count(); i++)
+        {
+            if (Coefs[i] != Math.Round(Coefs[i]))
+            {
+                equCoefsInt = false;
+            }
+        }
+
+        return equCoefsInt;
+    }
 }

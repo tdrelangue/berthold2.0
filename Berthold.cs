@@ -22,6 +22,9 @@ public class Berthold
         {
             CreateEquation();
             System.Console.WriteLine(Polynome);
+
+            System.Console.WriteLine(Polynome.TestNbInt());
+
             Solve = false; //temporary
         }
         Present("Have a wonderful day then user and may you be successful in your mathematic venture !");
