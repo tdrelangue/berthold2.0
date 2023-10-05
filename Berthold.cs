@@ -2,9 +2,11 @@ using System.Resources;
 public class Berthold
 {
     private bool Solve;
+    private Equation Polynome;
 
     public Berthold()
     {
+        Polynome = new Equation();
 
         Present("Hello dear user ! I am Berthold, a polynomial equation solver.\nShall I solve one for you ?");
         if((Console.ReadLine()!.ToLower() == "yes"))
@@ -19,6 +21,8 @@ public class Berthold
         while(Solve)
         {
             CreateEquation();
+            System.Console.WriteLine(Polynome);
+            Solve = false; //temporary
         }
         Present("Have a wonderful day then user and may you be successful in your mathematic venture !");
         B.Present();
@@ -40,14 +44,13 @@ public class Berthold
         Console.WriteLine("Type the coefficients from the one with the highest exponent to the one with the lowest.");
         Console.WriteLine("When you are done enter anything other than a decimal number");
         bool continu = true;
-        List<decimal> coefs = new List<decimal>(); 
 
         do
         {
             string answer = Console.ReadLine()!;
             if (decimal.TryParse(answer, out decimal coef))
             {
-                coefs.Add(coef);
+                Polynome.Coefs.Add(coef);
             }
             else
             {
@@ -56,9 +59,9 @@ public class Berthold
 
         }while (continu);
 
-        if(coefs.Count() == 0 )
+        if(Polynome.Coefs.Count() == 0 )
         {
-            coefs.Add(0);
+            Polynome.Coefs.Add(0);
         }
     }
 }
