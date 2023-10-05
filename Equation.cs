@@ -1,11 +1,15 @@
+using System.Xml.Linq;
+
 public class Equation
 {
-    public List<decimal> Coefs{get; private set;}   
+    public List<decimal> Coefs{get; private set;}
+    private Equation StartEqu;
 
 
     public Equation()
     {
         Coefs = new List<decimal>();
+        StartEqu = new Equation();
     }
 
 
@@ -150,5 +154,11 @@ public class Equation
         }
 
         return equCoefsInt;
+    }
+
+
+    public void SaveEqu()
+    {
+        StartEqu = this;
     }
 }
