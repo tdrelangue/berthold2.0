@@ -30,7 +30,8 @@ public class Berthold
             Present("Here is your an equivalent with all the numbers as integers");
             System.Console.WriteLine(Polynome);
             
-
+            Present("test ratio find");
+            SolveRatio();
             Solve = false; //temporary
         }
         Present("Have a wonderful day then user, and may you be successful in your mathematic venture !");
@@ -74,5 +75,10 @@ public class Berthold
         }
 
         Polynome.SaveEqu();
+    }
+
+    private void SolveRatio()
+    {
+        Polynome.ObviousRatioDividers = Polynome.FindObviousRatioDivisors();
     }
 }
