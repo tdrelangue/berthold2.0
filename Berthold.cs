@@ -2,11 +2,11 @@ using System.Resources;
 public class Berthold
 {
     private bool Solve;
-    private Equation Polynome;
+    private EquationManip Polynome;
 
     public Berthold()
     {
-        Polynome = new Equation();
+        Polynome = new EquationManip();
 
         Present("Hello dear user ! I am Berthold, a polynomial equation solver.\nShall I solve one for you ?");
         if((Console.ReadLine()!.ToLower() == "yes"))
@@ -21,7 +21,15 @@ public class Berthold
         while(Solve)
         {
             CreateEquation();
+            Present("Here is your polynome");
             System.Console.WriteLine(Polynome);
+
+            Polynome.MakeEquInt();
+
+
+            Present("Here is your an equivalent with all the numbers as integers");
+            System.Console.WriteLine(Polynome);
+            
 
             Solve = false; //temporary
         }
