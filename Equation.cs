@@ -241,9 +241,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
 
 
     public void FindRatioDivisors()
-    {
-        List<decimal> solutions = new List<decimal>();
-        
+    {        
         List<decimal> obviousDividers = FindObviousRatioDivisors();
 
         //we do the sythetic division for each obvious divider
@@ -259,5 +257,5 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-    
+
 }
