@@ -222,5 +222,5 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-
+    
 }
