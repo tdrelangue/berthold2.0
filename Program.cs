@@ -1,3 +1,3 @@
-﻿Berthold berthold = new Berthold();
+﻿new Berthold();
 
 

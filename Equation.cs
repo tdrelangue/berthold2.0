@@ -2,10 +2,12 @@ using System.Xml.Linq;
 
 public abstract class Equation
 {
-    public List<decimal> Coefs{get; protected set;}
+    public List<decimal> Coefs;
     protected int Multiplicator=1;
     protected List<int> Primes;
-    public List<decimal> ObviousRatioDividers {get; set;}
+    protected List<decimal> ObviousRatioDividers;
+    protected List<decimal> RatioSolutions;
+
 
 
     public Equation()
@@ -13,6 +15,7 @@ public abstract class Equation
         Coefs = new List<decimal>();
         Primes = new List<int>();
         ObviousRatioDividers = new List<decimal>();
+        RatioSolutions = new List<decimal>();
     }
 
 
@@ -219,6 +222,40 @@ protected int FindLowestWholeMultiplicator(decimal nb)
 
         //Let's now make the obvious divisors of the equation
         return MakeObviousDivisors(listA0, listAn);;
+    }
+
+
+    public List<decimal> MakeSyntheticDivision( decimal divisor)
+    {
+        //First we bring down the coefficient with the highest exponent
+        List<decimal> syntheticDivision= new List<decimal>() {Coefs[0]};
+        
+        //Then we do last number down * divisor + coef
+        for(int k = 1; k < Coefs.Count(); k++)
+        {
+            syntheticDivision.Add(syntheticDivision[syntheticDivision.Count()-1] * divisor + Coefs[k]);
+        }
+
+        return syntheticDivision;
+    }
+
+
+    public void FindRatioDivisors()
+    {
+        List<decimal> solutions = new List<decimal>();
+        
+        List<decimal> obviousDividers = FindObviousRatioDivisors();
+
+        //we do the sythetic division for each obvious divider
+        List<decimal> syntheticDivision;
+        for(int i = 0; i < obviousDividers.Count(); i++ )
+        {
+            syntheticDivision = MakeSyntheticDivision(obviousDividers[i]);
+            if(syntheticDivision[syntheticDivision.Count() - 1] == 0)
+            {
+                RatioSolutions.Add(obviousDividers[i]);
+            }
+        }
     }
 
 
