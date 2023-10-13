@@ -171,57 +171,56 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-    public List<decimal> FindObviousRatioDivisors()
+    private void FindDivisors(List<decimal> list, int coefIndex)
     {
-        //divisors of the coefficient of smallest exponent
-        List<decimal> listA0 = new List<decimal>();
-        int max = Coefs.Count()-1;
-        int a0 = Convert.ToInt32(Coefs[max]);
-        if(Math.Ceiling(Coefs[max]) == Math.Floor(Coefs[max]))
+        list.Add(1);
+        int a = Convert.ToInt32(Coefs[coefIndex]);
+        if (Math.Ceiling(Coefs[coefIndex]) == Math.Floor(Coefs[coefIndex]))
         {
-            for(int i = 1 ; i <= Math.Abs(a0); i++)
+            for (int i = 1; i <= Math.Abs(a); i++)
             {
-                if(a0 % i == 0)
+                if (a % i == 0)
                 {
-                    listA0.Add(i);
+                    list.Add(i);
                 }
             }
         }
         else
         {
-            listA0.Add(a0);
-            listA0.Add(1);
+            list.Add(a);
         }
+    }
 
-        //divisors of the coefficient of highest exponent
-        List<decimal> listAn = new List<decimal>();
-        int an = Convert.ToInt32(Coefs[0]);
-        if(Math.Ceiling(Coefs[0]) == Math.Floor(Coefs[0]))
-        {
-            for(int i = 1 ; i <= an; i++)
-            {
-                if(an % i == 0)
-                {
-                    listAn.Add(i);
-                }
-            }
-        }
-        else
-        {
-            listAn.Add(an);
-            listAn.Add(1);
-        }
-
-        //Let's now make the obvious divisors of the equation
+    
+    private static List<decimal> MakeObviousDivisors(List<decimal> listA0, List<decimal> listAn)
+    {
         List<decimal> divisors = new List<decimal>();
         for (int i = 0; i < listA0.Count(); i++)
         {
-            for(int j = 0; j < listAn.Count(); j++)
+            for (int j = 0; j < listAn.Count(); j++)
             {
                 divisors.Add(listA0[i] / listAn[j]);
-                divisors.Add( - listA0[i] / listAn[j]);
+                divisors.Add(-listA0[i] / listAn[j]);
             }
         }
         return divisors;
     }
+
+
+    public List<decimal> FindObviousRatioDivisors()
+    {
+        //divisors of the coefficient of smallest exponent
+        List<decimal> listA0 = new List<decimal> { 1 };
+        FindDivisors(listA0, Coefs.Count() - 1);
+
+        //divisors of the coefficient of highest exponent
+        List<decimal> listAn = new List<decimal>();
+        FindDivisors(listAn, 0);
+
+        //Let's now make the obvious divisors of the equation
+        return MakeObviousDivisors(listA0, listAn);;
+    }
+
+
+
 }

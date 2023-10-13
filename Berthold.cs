@@ -8,18 +8,13 @@ public class Berthold
     {
         Polynome = new EquationManip();
 
-        Present("Hello dear user ! I am Berthold, a polynomial equation solver.\nShall I solve one for you ?");
-        if((Console.ReadLine()!.ToLower() == "yes"))
-        {
-            Solve = true;
-        }
-        else
-        {
-            Solve = false;
-        }
+        Present("Hello dear user ! I am Berthold, a polynomial equation solver.\nLets start solving");
+        if(Console.ReadLine()!.ToLower() == "yes") { Solve = true; }
+        else { Solve = false; }
         
-        while(Solve)
-        {
+        do {
+            Solve = false;
+
             CreateEquation();
             Present("Here is your polynome");
             System.Console.WriteLine(Polynome);
@@ -32,10 +27,10 @@ public class Berthold
             
             Present("test ratio find");
             SolveRatio();
-            Solve = false; //temporary
-        }
+            
+        }while(Solve);
+
         Present("Have a wonderful day then user, and may you be successful in your mathematic venture !");
-        B.Present();
     }
 
 
