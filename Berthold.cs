@@ -25,10 +25,15 @@ public class Berthold
             Present("Here is your an equivalent with all the numbers as integers");
             System.Console.WriteLine(Polynome);
             
-            Present("test ratio find");
+            Present("We will start by finding for rational solutions");
             SolveRatio();
             System.Console.WriteLine(Polynome);
-            
+
+            if (Polynome.Coefs.Count()>1)
+                Present("I am not yet capable to find any other solution, but I know there are. Wait for future updates!");
+
+            Present("Shall we solve another one?");
+            if(Console.ReadLine()!.ToLower() == "yes") { Solve = true; }
         }while(Solve);
 
         Present("Have a wonderful day then user, and may you be successful in your mathematic venture !");
