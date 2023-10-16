@@ -36,32 +36,39 @@ public abstract class Equation
         {
             needParanthesis = true;
             foreach(decimal solution in RatioSolutions)
-                sentence += $"(x-{solution})";
+            {
+                
+                if (solution<0){
+                    sentence += $"(x+{-solution})";
+                }
+                else{
+                    sentence += $"(x-{solution})";
+                }
+                
+            }
         }
 
-        if (needParanthesis)
-        {
-            sentence += "(";
-        }       
+        
         
         // Right what is left without factorisation if need be 
-        if (Coefs.Count()!=1)
+        if (Coefs.Count()>1)
         {
+            if (needParanthesis)
+            {
+                sentence += "(";
+            }       
             for(int i = 0; i < Coefs.Count()- 1; i++)
             {
                 sentence += $"{Coefs[i]} * x^{Coefs.Count() - 1 - i} + ";
             }
             sentence += $"{Coefs[Coefs.Count()- 1]}";
-        }
-        else
-        {
-            sentence += "0";
+            if (needParanthesis)
+            {
+                sentence += ")";
+            }
         }
 
-        if (needParanthesis)
-        {
-            sentence += ")";
-        }
+        
 
         return sentence;
     } 
@@ -203,13 +210,13 @@ public abstract class Equation
     }
 
 
-    private void FindDivisors(List<decimal> list, int coefIndex)
+    private void FindIntDivisors(List<decimal> list, int coefIndex)
     {
         list.Add(1);
         int a = Convert.ToInt32(Coefs[coefIndex]);
         if (Math.Ceiling(Coefs[coefIndex]) == Math.Floor(Coefs[coefIndex]))
         {
-            for (int i = 1; i <= Math.Abs(a); i++)
+            for (int i = 2; i <= Math.Abs(a); i++)
             {
                 if (a % i == 0)
                 {
@@ -242,12 +249,12 @@ public abstract class Equation
     private void FindObviousRatioDivisors()
     {
         //divisors of the coefficient of smallest exponent
-        List<decimal> listA0 = new List<decimal> { 1 };
-        FindDivisors(listA0, Coefs.Count() - 1);
+        List<decimal> listA0 = new List<decimal>();
+        FindIntDivisors(listA0, Coefs.Count() - 1);
 
         //divisors of the coefficient of highest exponent
         List<decimal> listAn = new List<decimal>();
-        FindDivisors(listAn, 0);
+        FindIntDivisors(listAn, 0);
 
         //Let's now make the obvious divisors of the equation
         ObviousRatioDividers = MakeObviousRatioDivisors(listA0, listAn);;
@@ -269,6 +276,7 @@ public abstract class Equation
         //Then we do last number down * divisor + coef
         for(int k = 1; k < Coefs.Count(); k++)
         {
+
             syntheticDivision.Add(syntheticDivision[syntheticDivision.Count()-1] * divisor + Coefs[k]);
         }
 
@@ -288,7 +296,11 @@ public abstract class Equation
             if(syntheticDivision[syntheticDivision.Count() - 1] == 0)
             {
                 RatioSolutions.Add(obviousDivider);
-                SimplifyEquationRatio(obviousDivider);
+                Coefs = new List<decimal>();
+                for(int i = 0; i < syntheticDivision.Count()-1;i++)
+                {
+                    Coefs.Add(syntheticDivision[i]);
+                }
             }
         }
     }
@@ -297,26 +309,6 @@ public abstract class Equation
     public void FindDivisors()
     {
         FindRatioDivisors();
-    }
-
-
-    //simplification by factoryzing by (X-a) with a solution of P(X)
-    private void SimplifyEquationRatio(decimal factor)
-    {
-        List<decimal> SimplifiedEquation = new List<decimal>(){Coefs[0]};
-        // make new equation 
-        for (int i=1; i < Coefs.Count() -1;i++)
-        {
-            decimal lastCoefFound = SimplifiedEquation[i-1];
-            SimplifiedEquation.Add(Coefs[i]- factor * lastCoefFound);
-        }
-        
-        // insert it in coefs
-        Coefs = new List<decimal>();
-        foreach(decimal newCoef in SimplifiedEquation)
-        {
-            Coefs.Add(newCoef);
-        }
     }
 
 }

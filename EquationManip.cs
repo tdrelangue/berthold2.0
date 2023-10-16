@@ -33,31 +33,34 @@ public class EquationManip : Equation
         {
             needParanthesis = true;
             foreach(decimal solution in RatioSolutions)
-                sentence += $"(x-{solution})";
+            {
+                
+                if (solution<0){
+                    sentence += $"(x+{-solution})";
+                }
+                else{
+                    sentence += $"(x-{solution})";
+                }
+                
+            }
+                
         }
 
-        if (needParanthesis)
+        if (Coefs.Count()>1)
         {
-            sentence += "(";
-        }       
-        
-        // Right what is left without factorisation if need be 
-        if (Coefs.Count()!=1)
-        {
+            if (needParanthesis)
+            {
+                sentence += "(";
+            }       
             for(int i = 0; i < Coefs.Count()- 1; i++)
             {
                 sentence += $"{Coefs[i]} * x^{Coefs.Count() - 1 - i} + ";
             }
             sentence += $"{Coefs[Coefs.Count()- 1]}";
-        }
-        else
-        {
-            sentence += "0";
-        }
-
-        if (needParanthesis)
-        {
-            sentence += ")";
+            if (needParanthesis)
+            {
+                sentence += ")";
+            }
         }
 
         return sentence;
