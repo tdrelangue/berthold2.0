@@ -195,7 +195,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
     
-    private static List<decimal> MakeObviousDivisors(List<decimal> listA0, List<decimal> listAn)
+    private static List<decimal> MakeObviousRatioDivisors(List<decimal> listA0, List<decimal> listAn)
     {
         List<decimal> divisors = new List<decimal>();
         for (int i = 0; i < listA0.Count(); i++)
@@ -210,7 +210,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-    public List<decimal> FindObviousRatioDivisors()
+    private List<decimal> FindObviousRatioDivisors()
     {
         //divisors of the coefficient of smallest exponent
         List<decimal> listA0 = new List<decimal> { 1 };
@@ -221,10 +221,17 @@ protected int FindLowestWholeMultiplicator(decimal nb)
         FindDivisors(listAn, 0);
 
         //Let's now make the obvious divisors of the equation
-        return MakeObviousDivisors(listA0, listAn);;
+        return MakeObviousRatioDivisors(listA0, listAn);;
     }
 
 
+    public void FindObviousDivisors()
+    {
+        FindObviousRatioDivisors();
+    }
+
+
+    // make it so that I dont have to change it when I add complex
     public List<decimal> MakeSyntheticDivision( decimal divisor)
     {
         //First we bring down the coefficient with the highest exponent
@@ -240,7 +247,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-    public void FindRatioDivisors()
+    private void FindRatioDivisors()
     {        
         List<decimal> obviousDividers = FindObviousRatioDivisors();
 
@@ -257,5 +264,38 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
+    public void FindDivisors()
+    {
+        FindRatioDivisors();
+    }
+
+
+    //simplification by factoryzing by (X-a) with a solution of P(X)
+    private void SimplifyEquationRatio(decimal factor)
+    {
+        List<decimal> SimplifiedEquation = new List<decimal>(){Coefs[0]};
+        // make new equation 
+        for (int i=1; i < Coefs.Count() -1;i++)
+        {
+            decimal lastCoefFound = SimplifiedEquation[i-1];
+            SimplifiedEquation.Add(Coefs[i]- factor * lastCoefFound);
+        }
+        
+        // insert it in coefs
+        Coefs = new List<decimal>();
+        foreach(decimal newCoef in SimplifiedEquation)
+        {
+            Coefs.Add(newCoef);
+        }
+    }
+
+
+    public void SimplifyEquation()
+    {
+        foreach(decimal solution in RatioSolutions)
+        {
+            SimplifyEquationRatio(solution);
+        }
+    }
 
 }

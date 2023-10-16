@@ -1,6 +1,8 @@
 public class EquationManip : Equation
 {
     public EquastionStart BaseEquation;
+
+
     public EquationManip(): base ()
     {
         BaseEquation = new EquastionStart();
@@ -14,4 +16,5 @@ public class EquationManip : Equation
             BaseEquation.AddCoef(Coefs[i]);
         }
     }
+
 }

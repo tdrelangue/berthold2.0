@@ -74,6 +74,8 @@ public class Berthold
 
     private void SolveRatio()
     {
-        Polynome.FindObviousRatioDivisors();
+        Polynome.FindObviousDivisors();
+        Polynome.FindDivisors();
+        Polynome.SimplifyEquation();
     }
 }
