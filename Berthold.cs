@@ -9,8 +9,8 @@ public class Berthold
         Polynome = new EquationManip();
 
         Present("Hello dear user ! I am Berthold, a polynomial equation solver.\nLets start solving");
-        if(Console.ReadLine()!.ToLower() == "yes") { Solve = true; }
-        else { Solve = false; }
+        // if(Console.ReadLine()!.ToLower() == "yes") { Solve = true; }
+        // else { Solve = false; }
         
         do {
             Solve = false;
@@ -27,6 +27,7 @@ public class Berthold
             
             Present("test ratio find");
             SolveRatio();
+            System.Console.WriteLine(Polynome);
             
         }while(Solve);
 
@@ -74,8 +75,6 @@ public class Berthold
 
     private void SolveRatio()
     {
-        Polynome.FindObviousDivisors();
         Polynome.FindDivisors();
-        Polynome.SimplifyEquation();
     }
 }

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 public abstract class Equation
@@ -22,7 +23,29 @@ public abstract class Equation
     public override string ToString()
     {
         string sentence = "";
-        if (Coefs != null)
+        bool needParanthesis = false;
+
+        // if there is no equation left un factorized, we need to multiply by an
+        if (Coefs.Count() == 1)
+        {
+            sentence += $"{Coefs[0]}";
+        }
+
+        // factorize
+        if (RatioSolutions.Count() != 0)
+        {
+            needParanthesis = true;
+            foreach(decimal solution in RatioSolutions)
+                sentence += $"(x-{solution})";
+        }
+
+        if (needParanthesis)
+        {
+            sentence += "(";
+        }       
+        
+        // Right what is left without factorisation if need be 
+        if (Coefs.Count()!=1)
         {
             for(int i = 0; i < Coefs.Count()- 1; i++)
             {
@@ -34,8 +57,14 @@ public abstract class Equation
         {
             sentence += "0";
         }
+
+        if (needParanthesis)
+        {
+            sentence += ")";
+        }
+
         return sentence;
-    }
+    } 
 
 
     public void AddCoef(decimal coef)
@@ -44,7 +73,7 @@ public abstract class Equation
     }
 
 
-protected int FindLowestWholeMultiplicator(decimal nb)
+    protected int FindLowestWholeMultiplicator(decimal nb)
     {
         int multi = 0;
         
@@ -195,7 +224,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
     
-    private static List<decimal> MakeObviousRatioDivisors(List<decimal> listA0, List<decimal> listAn)
+    private List<decimal> MakeObviousRatioDivisors(List<decimal> listA0, List<decimal> listAn)
     {
         List<decimal> divisors = new List<decimal>();
         for (int i = 0; i < listA0.Count(); i++)
@@ -210,7 +239,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
     }
 
 
-    private List<decimal> FindObviousRatioDivisors()
+    private void FindObviousRatioDivisors()
     {
         //divisors of the coefficient of smallest exponent
         List<decimal> listA0 = new List<decimal> { 1 };
@@ -221,7 +250,7 @@ protected int FindLowestWholeMultiplicator(decimal nb)
         FindDivisors(listAn, 0);
 
         //Let's now make the obvious divisors of the equation
-        return MakeObviousRatioDivisors(listA0, listAn);;
+        ObviousRatioDividers = MakeObviousRatioDivisors(listA0, listAn);;
     }
 
 
@@ -249,16 +278,17 @@ protected int FindLowestWholeMultiplicator(decimal nb)
 
     private void FindRatioDivisors()
     {        
-        List<decimal> obviousDividers = FindObviousRatioDivisors();
+        FindObviousRatioDivisors();
 
         //we do the sythetic division for each obvious divider
         List<decimal> syntheticDivision;
-        for(int i = 0; i < obviousDividers.Count(); i++ )
+        foreach(decimal obviousDivider in ObviousRatioDividers)
         {
-            syntheticDivision = MakeSyntheticDivision(obviousDividers[i]);
+            syntheticDivision = MakeSyntheticDivision(obviousDivider);
             if(syntheticDivision[syntheticDivision.Count() - 1] == 0)
             {
-                RatioSolutions.Add(obviousDividers[i]);
+                RatioSolutions.Add(obviousDivider);
+                SimplifyEquationRatio(obviousDivider);
             }
         }
     }
@@ -286,15 +316,6 @@ protected int FindLowestWholeMultiplicator(decimal nb)
         foreach(decimal newCoef in SimplifiedEquation)
         {
             Coefs.Add(newCoef);
-        }
-    }
-
-
-    public void SimplifyEquation()
-    {
-        foreach(decimal solution in RatioSolutions)
-        {
-            SimplifyEquationRatio(solution);
         }
     }
 

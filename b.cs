@@ -3,7 +3,7 @@ public static class B
 {
     public static void Present()
     {
-        Console.WriteLine("\n\n============================================================\n\n");
+        Console.WriteLine("\n\n========================================================================================================================\n\n");
     }
 
     public static List<int> FindPrimes(int max)
